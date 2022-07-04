@@ -1,7 +1,7 @@
 const data = {
   webPage: {
     checked: false,
-    numPag: 0,
+    numPage: 0,
     numLang: 0,
     price: 500,
   },
