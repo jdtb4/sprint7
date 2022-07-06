@@ -11,6 +11,10 @@ function App() {
   const [isChecked, setIsChecked] = useState(false);
   const [joined, setJoined] = useState(true);
 
+  useEffect(() => {
+    setIsChecked(localStorage.getItem("isChecked"));
+  }, []);
+
   const handleBudget = (state) => {
     const { name, value, checked } = state.target;
     setbudget({
@@ -19,6 +23,7 @@ function App() {
     });
     if (name === "webPage") {
       setIsChecked(checked);
+      localStorage.setItem("isChecked", checked);
     }
   };
 
