@@ -1,13 +1,35 @@
-/*const Welcome = ({joined, setJoined}) => {
-    return (
-        {joined === false ? (
-            <div>
-                <h1>Bienvenido</h1>
-                <p>App web para calcular tu presupuesto online</p>
-                <button onClick={() => setJoined(true)}>Comenzar</button>
-            </div>
-        )},
-    );
-}
+import {
+  StyledWelcome,
+  StyledWelcomeTitle,
+  StyledWelcomeText,
+  StyledWelcomeButton,
+  StyledDescriptionWelcome,
+} from "../../Styles/Styles";
+import Budget from "../Budget/Budget";
 
-export default Welcome;*/
+const Welcome = ({ joined, setJoined }) => {
+  return (
+    <>
+      {joined ? (
+        <StyledWelcome>
+          <StyledWelcomeTitle>Bienvenido</StyledWelcomeTitle>
+          <StyledWelcomeText>
+            ¿Necesitas calcular un prespuesto? ¿Eres desarrollador y necesitas
+            una aplicacion donde puedas hacerlo de manera falcil? ¡Entonces esta
+            es tu aplicación!
+          </StyledWelcomeText>
+          <StyledDescriptionWelcome>
+            En ella podrás elegir entre los servicios que quieras presupuestar y
+            modificar los campos disponibles.
+          </StyledDescriptionWelcome>
+          <StyledWelcomeButton onClick={() => setJoined(false)}>
+            Comenzar
+          </StyledWelcomeButton>
+        </StyledWelcome>
+      ) : null}
+      <Budget />
+    </>
+  );
+};
+
+export default Welcome;

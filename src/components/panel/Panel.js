@@ -1,39 +1,14 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import Popup from "../Popup/Popup";
+import { StyledPanel, StyledButton, StyledInput } from "../../Styles/Styles";
 
-const StyledPanel = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #aed6f1;
-  border-radius: 15px;
-  padding: 12px;
-  margin: 10px;
-`;
-const StyledButton = styled.button`
-  background-color: #aed6f1;
-  margin: 5px;
-  color: #1a5276;
-  width: 25px;
-  height: 25px;
-  border-radius: 7px;
-  border: none;
-  font-size: 18px;
-  box-shadow: 0px 0px 5px #d6eaf8;
-`;
-const StyledInput = styled.input`
-  width: 40px;
-  height: 20px;
-  border: none;
-`;
-
-const Panel = ({ totalBudget, setTotalBudget }) => {
+const Panel = ({ totalBudget, setTotalBudget, setSumaValor }) => {
   const [value, setValue] = useState({
     numPage: 0,
     numLang: 0,
   });
   const { numLang, numPage } = value;
+
   const handleChange = (e) => {
     setValue({
       ...value,
@@ -45,20 +20,48 @@ const Panel = ({ totalBudget, setTotalBudget }) => {
     if (numPage <= 0 || numLang <= 0) {
       return;
     }
-    const totalPrice = numPage * numLang * 30;
-    setTotalBudget(totalBudget + totalPrice);
-    localStorage.setItem("totalBudget", totalBudget + totalPrice);
   };
+  const AddPage = () => {
+    const suma = parseInt(numPage) + 1;
+    setValue({
+      ...value,
+      numPage: suma,
+    });
+  };
+  const SubtractPage = () => {
+    const subtrc = parseInt(numPage) - 1;
+    setValue({
+      ...value,
+      numPage: subtrc,
+    });
+  };
+
+  const AddLang = () => {
+    const suma = parseInt(numLang) + 1;
+    setValue({
+      ...value,
+      numLang: suma,
+    });
+  };
+  const SubtractLang = () => {
+    const subtrc = parseInt(numLang) - 1;
+    setValue({
+      ...value,
+      numLang: subtrc,
+    });
+  };
+
+  useEffect(() => {
+    if (numPage > 0 && numLang > 0) {
+      setTotalBudget(totalBudget + numPage * numLang * 30);
+    }
+  }, [numPage, numLang]);
+
   return (
     <>
       <StyledPanel>
         <p>Número de páginas:</p>
-        <StyledButton
-          type="button"
-          name="numPage"
-          value={numPage + 1}
-          onClick={handleChange}
-        >
+        <StyledButton type="button" name="numPage" onClick={AddPage}>
           +
         </StyledButton>
         <StyledInput
@@ -68,12 +71,7 @@ const Panel = ({ totalBudget, setTotalBudget }) => {
           min={0}
           onChange={handleChange}
         ></StyledInput>
-        <StyledButton
-          type="button"
-          name="numPage"
-          value={numPage - 1}
-          onClick={handleChange}
-        >
+        <StyledButton type="button" name="numPage" onClick={SubtractPage}>
           -
         </StyledButton>
         <Popup
@@ -83,27 +81,17 @@ const Panel = ({ totalBudget, setTotalBudget }) => {
       </StyledPanel>
       <StyledPanel>
         <p>Número de idiomas:</p>
-        <StyledButton
-          type="button"
-          name="numLang"
-          value={numLang + 1}
-          onClick={handleChange}
-        >
+        <StyledButton type="button" name="numLang" onClick={AddLang}>
           +
         </StyledButton>
         <StyledInput
           type="number"
           name="numLang"
-          min={0}
           value={numLang}
+          min={0}
           onChange={handleChange}
         ></StyledInput>
-        <StyledButton
-          type="button"
-          name="numLang"
-          value={numLang - 1}
-          onClick={handleChange}
-        >
+        <StyledButton type="button" name="numLang" onClick={SubtractLang}>
           -
         </StyledButton>
         <Popup
