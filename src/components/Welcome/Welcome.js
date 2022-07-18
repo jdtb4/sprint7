@@ -15,7 +15,7 @@ const Welcome = ({ joined, setJoined }) => {
           <StyledWelcomeTitle>Bienvenido</StyledWelcomeTitle>
           <StyledWelcomeText>
             ¿Necesitas calcular un prespuesto? ¿Eres desarrollador y necesitas
-            una aplicacion donde puedas hacerlo de manera falcil? ¡Entonces esta
+            una aplicacion donde puedas hacerlo de manera fácil? ¡Entonces esta
             es tu aplicación!
           </StyledWelcomeText>
           <StyledDescriptionWelcome>
